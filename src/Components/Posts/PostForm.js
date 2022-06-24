@@ -1,18 +1,35 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addPost } from "./PostSlice";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addPost,
+  fetchUsers,
+  allPosts,
+  allStatus,
+  allError,
+} from "./PostSlice";
 const PostForm = () => {
   const [username, setUsername] = useState("");
   const [body, setBody] = useState("");
   const dispatch = useDispatch();
 
+  const posts = useSelector(allPosts);
+  const status = useSelector(allStatus);
+  const error = useSelector(allError);
+
   const handlePost = (e) => {
     e.preventDefault();
-    console.log(username, body);
+
     dispatch(addPost(username, body));
     setUsername("");
     setBody("");
   };
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch, status]);
+
   return (
     <div>
       <div>

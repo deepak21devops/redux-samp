@@ -4,11 +4,11 @@ import { allPosts } from "./PostSlice";
 import SinglePosts from "./SinglePosts";
 const PostList = () => {
   const posts = useSelector(allPosts);
-  console.log(posts);
+  const orderedPost = posts.slice().sort((a, b) => b - a);
 
   return (
     <div>
-      {posts.map((ele) => (
+      {orderedPost.map((ele) => (
         <div key={ele.id} style={{ marginBottom: "30px" }}>
           <p>{ele.name}</p>
           <p>{ele.body}</p>

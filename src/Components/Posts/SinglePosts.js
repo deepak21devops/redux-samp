@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addreaction } from "./PostSlice";
+import { allPosts } from "./PostSlice";
 
 const SinglePosts = ({ post }) => {
   const dispatch = useDispatch();
